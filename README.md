@@ -78,7 +78,7 @@ Password: <your password>
 
 ### Password Restoration:
 
-At the time of password Restoration eamil will be send to registered email id but error handling if email id does not exist is not implemented yet
+At the time of password Restoration email will be send to registered email id but error handling if email id does not exist is not implemented yet
 
 ### .env
     email_sender  = <email_from_which_chat_app_will_send_emai>
