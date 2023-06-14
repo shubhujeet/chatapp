@@ -1770,7 +1770,7 @@ class Register(ctk.CTkFrame):
                 with mysql.connector.connect(host=os.getenv("host_name"),database=os.getenv('database_name'),user=os.getenv("user_name"),password=os.getenv("passwd_db")) as db:
                     if db.is_connected():
                         cursor=db.cursor()
-                        cursor.execute("insert into user (id,ic,password,remember) values ('%s','%s');"% (uid,b"",pswd,""))
+                        cursor.execute("insert into user (id,ic,password,remember) values (%s,%s,%s,%s);"% (uid,b"",pswd,""))
                         db.commit()
                         cursor.close()
                         notification = None
