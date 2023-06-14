@@ -6,7 +6,7 @@ A simple chat application model build using python.
 
 ## Features
 
-- Use (CTRL+TAB) to get recomendation
+- Use (CTRL+TAB) to get recommendation
 - Use Right-Click to open opts available on User Logo, Contacts, Messages
 - Use (CTRL+Enter) shorcut key to send messages 
 - User can add profile image which will auto crop in elliptical shape
@@ -37,7 +37,7 @@ Sending message to contact
 Right-Clcik to see avalable option on messages
 
 ![Screenshot (1016)](https://github.com/shubhujeet/chatapp/assets/92719242/88c8d8f2-9232-4a5d-b0c3-9deebefa3197)
-Right-Click on the uses label to see user profile
+Click on the uses label to see user profile
 
 ![Screenshot (1017)](https://github.com/shubhujeet/chatapp/assets/92719242/dec4519d-3d9a-4c33-86da-d059bc5ebebd)
 Successfully Profile icon change
