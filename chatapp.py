@@ -1600,7 +1600,6 @@ class Register(ctk.CTkFrame):
                                 padx=68, 
                                 fill='x'
                                 )
-        self.rconf_passwd_ent.insert(0,"12341234")
 
         self.rconf_passwd_ent.bind("<Return>",self.check_pass,add="+")
         self.rconf_passwd_ent.bind("<Leave>",self.check_pass,add="+")
