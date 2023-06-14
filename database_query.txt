@@ -1,0 +1,11 @@
+# CREATING TABLE
+
+1> create table if not exists user(id varchar(300) primary key, ic longblob, password varchar(1000) not null, remember varchar(3));
+
+2> create table if not exists contact(cid varchar(300) not null, cic longblob, cname varchar(1000),contact_of varchar(300) not null,primary key (cid),foreign key (cid) references user(id));
+
+3> create table if not exists message(mid int primary key auto_increment, sen varchar(300) not null, rec varchar(300), msg longblob,mkey longblob, mtag longblob, mnonce longblob);
+
+
+
+insert into user(id,ic,password,remember) values("yourname@gmail.com","","12345678","yes");
