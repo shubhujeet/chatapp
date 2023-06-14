@@ -150,7 +150,7 @@ class ContactOpt(ctk.CTkToplevel):
 # class for displaying profile window
 
 class ProfilePage(ctk.CTkToplevel):
-    def __init__(self,log_user,name_label,email,icon,passwd=None,*args,**kwargs):
+    def __init__(self,log_user,email,icon,name_label=None,passwd=None,*args,**kwargs):
         super().__init__(*args,**kwargs)
 
         self.log_user = log_user
@@ -493,9 +493,10 @@ class Chat_App(ctk.CTkFrame):
         self.log_user = log_user
         self.profile_window = None
         self.toplevel_window = None
+        self.loger_img = "my_image"
         self.h_var = 50
         bimg = None
-
+        self.my_image_path= "my_image"
         # TODO database call
         try:
             with mysql.connector.connect(host=os.getenv("host_name"),database=os.getenv("database_name"),user=os.getenv('user_name'),password=os.getenv("passwd_db")) as db:
@@ -808,7 +809,8 @@ class Chat_App(ctk.CTkFrame):
                 file.write(icon)
             icon = self.loger_img
 
-        pp = ProfilePage(self.log_user,self.nameLabel,email,icon,password,fg_color="grey20")
+
+        pp = ProfilePage(log_user=self.log_user, email=email, icon=icon, name_label=self.nameLabel, passwd=password,fg_color="grey20")
 
 
     def show_chat_opt(self,msg,m_id):
@@ -1344,7 +1346,8 @@ class Login(ctk.CTkFrame):
                                 for wid in self.master.winfo_children():
                                     wid.pack_forget()
                                 
-                                self.leftContainer.pack_forget()
+                                if self.leftContainer is not None:
+                                    self.leftContainer.pack_forget()
 
                                 f = Chat_App(self.master,uid)
                                 f.pack(fill='both',expand=True)
@@ -1770,7 +1773,8 @@ class Register(ctk.CTkFrame):
                 with mysql.connector.connect(host=os.getenv("host_name"),database=os.getenv('database_name'),user=os.getenv("user_name"),password=os.getenv("passwd_db")) as db:
                     if db.is_connected():
                         cursor=db.cursor()
-                        cursor.execute("insert into user (id,ic,password,remember) values (%s,%s,%s,%s);"% (uid,b"",pswd,""))
+                        sql_query="insert into user (id,ic,password,remember) values ('%s',%s,'%s','%s');" % (uid,b"",pswd," ")
+                        cursor.execute(sql_query)
                         db.commit()
                         cursor.close()
                         notification = None
