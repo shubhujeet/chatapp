@@ -972,6 +972,20 @@ class Login(ctk.CTkFrame):
         self.passwd_flag = False
         self.leftContainer = leftContainer
 
+        try:
+            with mysql.connector.connect(host=os.getenv("host_name"),database=os.getenv("database_name"),user=os.getenv("user_name"),password=os.getenv("passwd_db")) as db:
+                if db.is_connected():
+                    cursor = db.cursor()
+                    sql_query1 = """create table if not exists user(id varchar(300) primary key, ic longblob, password varchar(1000) not null, remember varchar(3));"""
+                    cursor.execute(sql_query1)
+                    db.commit()
+                    sql_query2 = """create table if not exists message(mid int primary key auto_increment, sen varchar(300) not null, rec varchar(300), msg longblob,mkey longblob, mtag longblob, mnonce longblob);"""
+                    cursor.execute(sql_query2)
+                    db.commit()
+                    cursor.close()
+
+        except Error as e:
+            print(e)
 
         # login ui
 
@@ -1317,12 +1331,6 @@ class Login(ctk.CTkFrame):
                     
                     if db.is_connected():
                         cursor=db.cursor()
-                        sql_query1 = """create table if not exists user(id varchar(300) primary key, ic longblob, password varchar(1000) not null, remember varchar(3));"""
-                        cursor.execute(sql_query1)
-                        db.commit()
-                        sql_query2 = """create table if not exists message(mid int primary key auto_increment, sen varchar(300) not null, rec varchar(300), msg longblob,mkey longblob, mtag longblob, mnonce longblob);"""
-                        cursor.execute(sql_query2)
-                        db.commit()
                         cursor.execute("select id,password,remember from user where id = '%s';" % uid)
                         record = cursor.fetchone()
                         print(record)
