@@ -363,6 +363,7 @@ class AddUser(ctk.CTkToplevel):
 
 
         except Error as e:
+            print(e)
             print(e.errno)
             if e.errno == 1062:
                 print("catched") 
@@ -604,7 +605,7 @@ class Chat_App(ctk.CTkFrame):
 
                 if db.is_connected():
                     cursor=db.cursor()
-                    sql_query = """create table if not exists contact(cid varchar(300) not null, cic longblob, cname varchar(1000),contact_of varchar(300) not null,primary key (cid),foreign key (cid) references user(id));"""
+                    sql_query = """create table if not exists contact(cid varchar(300) not null, cic longblob, cname varchar(1000),contact_of varchar(300) not null,foreign key (cid) references user(id));"""
                     cursor.execute(sql_query)
                     sql_query = """select * from contact where contact_of = '%s';""" % (self.log_user)
                     cursor.execute(sql_query)
@@ -1346,7 +1347,7 @@ class Login(ctk.CTkFrame):
                                 for wid in self.master.winfo_children():
                                     wid.pack_forget()
                                 
-                                if self.leftContainer is not None:
+                                if self.leftContainer != None:
                                     self.leftContainer.pack_forget()
 
                                 f = Chat_App(self.master,uid)
@@ -2387,7 +2388,7 @@ class App(ctk.CTk):
                                         fill="both",
                                         expand=True
                                         )
-        self.right_container = Login(self.right_container_body,self.left_container, corner_radius=0)
+        self.right_container = Login(self.right_container_body,leftContainer=self.left_container, corner_radius=0)
         self.right_container.pack(side="left", 
                                     fill="both", 
                                     expand=True
